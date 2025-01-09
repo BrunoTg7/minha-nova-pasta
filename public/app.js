@@ -1,7 +1,7 @@
 const videos = [
   {
     nome: "Deadpool & Wolverine",
-    url: "https://minha-nova-pasta.vercel.app/fhd4.doramasapp/343rt342wtg34wetg34retg4rghy5rh/FHD4/tt6263850.mp4",
+    url: "https://minha-nova-pasta.vercel.app/fhd4.doramasapp.xyz/343rt342wtg34wetg34retg4rghy5rh/FHD4/tt6263850.mp4",
   },
   {
     nome: "Venom: A Última Rodada",
