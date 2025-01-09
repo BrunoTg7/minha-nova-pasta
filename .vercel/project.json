@@ -1,0 +1,8 @@
+{
+    "functions": {
+      "node12.x": {
+        "runtime": "nodejs12.x"
+      }
+    }
+  }
+  

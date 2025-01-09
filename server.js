@@ -11,7 +11,7 @@ const app = express();
 
 // Gerar certificados autoassinados
 const attrs = [{ name: "commonName", value: "localhost" }];
-const pems = selfsigned.generate(attrs, { days: 365 });
+//const pems = selfsigned.generate(attrs, { days: 365 });
 
 // Configurar CORS
 app.use(cors());
