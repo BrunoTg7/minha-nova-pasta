@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <title>Streaming de Canais e Séries</title>
+    <style>
+      * {
+        margin: 0;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #111;
+        color: #fff;
+      }
+
+      header {
+        background-color: #222;
+        padding: 10px 20px;
+        text-align: center;
+      }
+
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .card {
+        background-color: #333;
+        margin: 10px;
+        padding: 15px;
+        border-radius: 5px;
+        width: 350px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      .card img {
+        width: 100%;
+        height: 150px;
+        border-radius: 5px;
+      }
+
+      .card button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+        font-size: 16px;
+      }
+
+      .card button:hover {
+        background-color: #45a049;
+      }
+
+      iframe, video {
+        margin-left: 10%;
+        margin-right: 10%;
+        width: 80%;
+        height: 700px;
+        border: 0;
+        margin: 4% auto;
+        display: none;
+        overflow: hidden;
+        scrollbar-width: none;
+      }
+
+      .card h3 {
+        margin: 0;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      li {
+        padding: 16px;
+        border-bottom: 1px solid #ddd;
+      }
+      li:last-child {
+        border-bottom: none;
+      }
+      li:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      li:hover {
+        background-color: #efefef;
+      }
+      a {
+        color: #1a73e8;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      a:hover {
+        color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Streaming de Canais e Séries</h1>
+    </header>
+    <main>
+      <div class="contexto">
+        <div class="container">
+          <!-- Amazon Prime Video -->
+          <div class="card">
+            <h3>Amazon Prime Video</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.com/amazonprimevideo/')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Band Sports -->
+          <div class="card">
+            <h3>Band Sports</h3>
+            <button
+              onclick="carregarIframe('https://anonstream.zip/bandsports/index.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Combate -->
+          <div class="card">
+            <h3>Combate</h3>
+            <button
+              onclick="carregarIframe('https://xyzdddd.mizhls.ru/lb/premium89/index.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- CazeTV -->
+          <div class="card">
+            <h3>CazeTV</h3>
+            <button
+              onclick="carregarIframe('https://super-cdn.link/cazetv2/index.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Disney Plus -->
+          <div class="card">
+            <h3>Disney Plus</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.club/disneyplus/video.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- ESPN1 -->
+          <div class="card">
+            <h3>ESPN1</h3>
+            <button
+              onclick="carregarIframe('https://super-cdn.link/espn/index.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- ESPN2 -->
+          <div class="card">
+            <h3>ESPN2</h3>
+            <button
+              onclick="carregarIframe('https://super-cdn.link/espn2/index.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- ESPN3 -->
+          <div class="card">
+            <h3>ESPN3</h3>
+            <button
+              onclick="carregarIframe('https://super-cdn.link/espn3/index.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- ESPN4 -->
+          <div class="card">
+            <h3>ESPN4</h3>
+            <button
+              onclick="carregarIframe('http://tv.fazoeli.co.za/m3u8/espn4.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Max -->
+          <div class="card">
+            <h3>Max</h3>
+            <button onclick="carregarIframe('https://embedcanaistv.com/max/')">
+              Assistir
+            </button>
+          </div>
+
+          <!-- Max2 -->
+          <div class="card">
+            <h3>Max2</h3>
+            <button onclick="carregarIframe('https://embedcanaistv.com/max2/')">
+              Assistir
+            </button>
+          </div>
+
+          <!-- Nosso Futebol -->
+          <div class="card">
+            <h3>Nosso Futebol</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.com/nossofutebol/')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Paramount Plus -->
+          <div class="card">
+            <h3>Paramount Plus</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.com/paramountplus/')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Premiere Clubes -->
+          <div class="card">
+            <h3>Premiere Clubes</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.com/premiereclubes/')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Premiere 2 -->
+          <div class="card">
+            <h3>Premiere 2</h3>
+            <button
+              onclick="carregarIframe('https://super-cdn.link/premiere2/index.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Premiere 5 -->
+          <div class="card">
+            <h3>Premiere 5</h3>
+            <button
+              onclick="carregarIframe('https://super-cdn.link/premiere5/index.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Sportv -->
+          <div class="card">
+            <h3>Sportv</h3>
+            <button
+              onclick="carregarIframe('https://super-cdn.link/sportv/index.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Sportv2 -->
+          <div class="card">
+            <h3>Sportv2</h3>
+            <button
+              onclick="carregarIframe('https://super-cdn.link/sportv2/index.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Sportv3 -->
+          <div class="card">
+            <h3>Sportv3</h3>
+            <button
+              onclick="carregarIframe('https://super-cdn.link/sportv3/index.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Star Plus -->
+          <div class="card">
+            <h3>Star Plus</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.com/starplus/')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- TNT -->
+          <div class="card">
+            <h3>TNT</h3>
+            <button
+              onclick="carregarIframe('https://cdn-3.nxplay.com.br/TNT_TK/tracks-v2a1/mono.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+          <!-- TNT Sports -->
+          <div class="card">
+            <h3>TNT Sports</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.com/tntsports/')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- TNT Sports 2 -->
+          <div class="card">
+            <h3>TNT Sports 2</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.com/tntsports2/')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- TNT Sports 3 -->
+          <div class="card">
+            <h3>TNT Sports 3</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.com/tntsports3/')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- UFC Fight Pass -->
+          <div class="card">
+            <h3>UFC Fight Pass</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.com/ufcfightpass/')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- RedeTV -->
+          <div class="card">
+            <h3>RedeTV</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.com/redetv/')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Rede Vida -->
+          <div class="card">
+            <h3>Rede Vida</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.com/redevida/')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- SBT SP -->
+          <div class="card">
+            <h3>SBT SP</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.com/sbtsp/')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- TV Cultura -->
+          <div class="card">
+            <h3>TV Cultura</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.com/tvcultura/')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- A&E -->
+          <div class="card">
+            <h3>A&E</h3>
+            <button onclick="carregarIframe('https://cdn-3.nxplay.com.br/AeE_BRASIL_TK/tracks-v2a1/mono.m3u8')">
+              Assistir
+            </button>
+          </div>
+
+          <!-- AMC -->
+          <div class="card">
+            <h3>AMC</h3>
+            <button onclick="carregarIframe('https://cdn-3.nxplay.com.br/AMC_BRASIL_TK/tracks-v2a1/mono.m3u8')">
+              Assistir
+            </button>
+          </div>
+
+          <!-- AXN -->
+          <div class="card">
+            <h3>AXN</h3>
+            <button onclick="carregarIframe('https://cdn-3.nxplay.com.br/AXN_TK/tracks-v2a1/mono.m3u8')">
+              Assistir
+            </button>
+          </div>
+
+          <!-- Cinecanal -->
+          <div class="card">
+            <h3>Cinecanal</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.com/cinecanal/')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Cinemax -->
+          <div class="card">
+            <h3>Cinemax</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.com/cinemax/')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- FX -->
+          <div class="card">
+            <h3>FX</h3>
+            <button onclick="carregarIframe('http://super-cdn.link/fx/index.m3u8')">
+              Assistir
+            </button>
+          </div>
+
+          <!-- Film&Arts -->
+          <div class="card">
+            <h3>Film&Arts</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.club/filmarts/tracks-v1a1/mono.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- HBO -->
+          <div class="card">
+            <h3>HBO</h3>
+            <button onclick="carregarIframe('http://izcdn.vood.top:80/hls/18756_.m3u8')">
+              Assistir
+            </button>
+          </div>
+
+          <!-- HBO Family -->
+          <div class="card">
+            <h3>HBO Family</h3>
+            <button
+              onclick="carregarIframe('http://czcdn.vood.top:80/hls/18759_.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- HBO + -->
+          <div class="card">
+            <h3>HBO +</h3>
+            <button
+              onclick="carregarIframe('http://altv1.top//live/JaneFerreira425/tfvj41/311534.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Star Channel -->
+          <div class="card">
+            <h3>Star Channel</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.club/starchannel/tracks-v1a1/mono.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- TNT -->
+          <div class="card">
+            <h3>TNT</h3>
+            <button onclick="carregarIframe('https://embedcanaistv.club/tnt/video.m3u8')">
+              Assistir
+            </button>
+          </div>
+
+          <!-- Universal TV -->
+          <div class="card">
+            <h3>Universal TV</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.com/universaltv/')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- TCM -->
+          <div class="card">
+            <h3>TCM</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.com/tctouch/')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Warner -->
+          <div class="card">
+            <h3>Warner</h3>
+            <button
+              onclick="carregarIframe('https://super-cdn.link/warnerchannel/index.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Animal Planet -->
+          <div class="card">
+            <h3>Animal Planet</h3>
+            <button
+              onclick="carregarIframe('https://cdn-1.nxplay.com.br/ANIMAL_PLANET_NX/index.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Multishow -->
+          <div class="card">
+            <h3>Multishow</h3>
+            <button onclick="carregarIframe('http://authxplus-2.xyz:2082/live/Tourobox1-APhnnJ6sQS/7nAiGmzfNG/423.m3u8')">
+              Assistir
+            </button>
+          </div>
+
+          <!-- Cartoon Network -->
+          <div class="card">
+            <h3>Cartoon Network</h3>
+            <button
+              onclick="carregarIframe('https://cdn-3.nxplay.com.br/CARTOON_NETWORK_TK/tracks-v2a1/mono.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Cartoonito -->
+          <div class="card">
+            <h3>Cartoonito</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.com/cartoonito/')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Discovery Kids -->
+          <div class="card">
+            <h3>Discovery Kids</h3>
+            <button
+              onclick="carregarIframe('http://svrhost.club//live/C96VW13E/DPIZ4JSVM/2039.ts')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Disney Channel -->
+          <div class="card">
+            <h3>Disney Channel</h3>
+            <button
+              onclick="carregarIframe('http://15.235.50.115:14563/DisneyChannel.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Gloob -->
+          <div class="card">
+            <h3>Gloob</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.com/gloob/')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- Nick Jr -->
+          <div class="card">
+            <h3>Nick Jr</h3>
+            <button
+              onclick="carregarIframe('https://bit.ly/3rUCg15?profile=5f121460b73ac6000719fbaf.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+
+          <!-- BAND SP -->
+          <div class="card">
+            <h3>BAND</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.club/bandsp/index.m3u8/')"
+            >
+              Assistir
+            </button>
+          </div>
+          <!-- GLOBO BA -->
+          <div class="card">
+            <h3>GLOBO BA</h3>
+            <button
+              onclick="carregarIframe('http://hls1.sua.tv/live/globotvbahiafhdbr2/s.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+          <!-- GLOBO SP -->
+          <div class="card">
+            <h3>GLOBO SP</h3>
+            <button
+              onclick="carregarIframe('https://cdn-3.nxplay.com.br/GLOBO_SP_TK/tracks-v2a1/mono.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+          <!-- RECORD SP -->
+          <div class="card">
+            <h3>RECORD SP</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.club/recordsp/index.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+          <!-- SBT -->
+          <div class="card">
+            <h3>SBT</h3>
+            <button
+              onclick="carregarIframe('http://wz4.dnip.com.br/bemtv/bemtv.sdp/playlist.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+          <!-- TV CULTURA -->
+          <div class="card">
+            <h3>TV CULTURA</h3>
+            <button
+              onclick="carregarIframe('https://cdn-3.nxplay.com.br/CATVE/tracks-v1a1/mono.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+          <!-- MEGAPIX -->
+          <div class="card">
+            <h3>MEGAPIX</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.club/megapix/tracks-v1a1/mono.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+          <!-- GNT -->
+          <div class="card">
+            <h3>GNT</h3>
+            <button onclick="carregarIframe('https://embedcanaistv.com/gnt/')">
+              Assistir
+            </button>
+          </div>
+          <!-- MTV -->
+          <div class="card">
+            <h3>MTV</h3>
+            <button onclick="carregarIframe('http://181.78.105.146:6060/play/a011/index.m3u8')">
+              Assistir
+            </button>
+          </div>
+          <!-- CNN BRASIL -->
+          <div class="card">
+            <h3>CNN BRASIL</h3>
+            <button
+              onclick="carregarIframe('https://cdn-3.nxplay.com.br/CNN_FAST/tracks-v2a1/mono.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+          <!-- dreamworks channel -->
+          <div class="card">
+            <h3>dreamworks channel</h3>
+            <button
+              onclick="carregarIframe('https://cdn-3.nxplay.com.br/DREAMWORKS/index.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+          <!-- GLOOBINHO -->
+          <div class="card">
+            <h3>GLOOBINHO</h3>
+            <button
+              onclick="carregarIframe('http://izcdn.vood.top:80/hls/260419_.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+          <!-- GLOOBINHO -->
+          <div class="card">
+            <h3>GLOOBINHO</h3>
+            <button
+              onclick="carregarIframe('http://dzcdn.vood.top:80/hls/260421_.m3u8')"
+            >
+              Assistir
+            </button>
+          </div>
+          <!-- 24h-simpsons -->
+          <div class="card">
+            <h3>24h-simpsons</h3>
+            <button
+              onclick="carregarIframe('https://embedcanaistv.com/24h-simpsons/')"
+            >
+              Assistir
+            </button>
+          </div>
+          <ul id="videoList"></ul>
+        </div>
+        <video id="videoPlayer" controls type="video/mp4" >
+          Seu navegador não suporta o elemento de vídeo.
+        </video>
+      </div>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
