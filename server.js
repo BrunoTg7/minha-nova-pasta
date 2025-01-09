@@ -11,7 +11,7 @@ const app = express();
 
 // Gerar certificados autoassinados
 const attrs = [{ name: "commonName", value: "localhost" }];
-//const pems = selfsigned.generate(attrs, { days: 365 });
+const pems = selfsigned.generate(attrs, { days: 365 });
 
 // Configurar CORS
 app.use(cors());
@@ -63,11 +63,13 @@ app.use(
     target: "",
     changeOrigin: true,
     router: function (req) {
-      const targetUrl = new URL(req.query.url);
+      // Adicionar http:// ao URL se ele não começar com http:// ou https://
+      const targetUrl = new URL(req.query.url.match(/^https?:\/\//) ? req.query.url : 'http://' + req.query.url);
       return targetUrl.origin;
     },
     pathRewrite: function (path, req) {
-      const targetUrl = new URL(req.query.url);
+      // Adicionar http:// ao URL se ele não começar com http:// ou https://
+      const targetUrl = new URL(req.query.url.match(/^https?:\/\//) ? req.query.url : 'http://' + req.query.url);
       return targetUrl.pathname + targetUrl.search;
     },
     onProxyRes: function (proxyRes, req, res) {

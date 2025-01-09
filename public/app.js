@@ -40,7 +40,10 @@ function criarListaDeVideos() {
     button.addEventListener("click", function (event) {
       event.preventDefault();
       const videoSrc = this.getAttribute("data-src");
-      carregarIframe(videoSrc);
+      const videoPlayer = document.getElementById("videoPlayer");
+      videoPlayer.style.display = "block"
+      videoPlayer.src = videoSrc;
+      videoPlayer.play();
     });
     li.appendChild(button);
     videoList.appendChild(li);
@@ -53,23 +56,25 @@ function carregarIframe(url) {
   var videoPlayer = document.getElementById("videoPlayer");
   videoPlayer.style.display = "block";
   videoPlayer.src = null;
+  const modifiedUrl = url.replace(/^https?:\/\//, ''); // Remove o prefixo http:// ou https://
   if (Hls.isSupported()) {
     var hls = new Hls();
-    hls.loadSource('/proxy?url=' + encodeURIComponent(url));
+    hls.loadSource(`/proxy?url=${encodeURIComponent(modifiedUrl)}`);
     hls.attachMedia(videoPlayer);
     hls.on(Hls.Events.MANIFEST_PARSED, function () {
       videoPlayer.play();
     });
   } else if (videoPlayer.canPlayType("application/vnd.apple.mpegurl")) {
-    videoPlayer.src = '/proxy?url=' + encodeURIComponent(url);
+    videoPlayer.src = `/proxy?url=${encodeURIComponent(modifiedUrl)}`;
     videoPlayer.addEventListener("canplay", function () {
       videoPlayer.play();
     });
   } else {
-    videoPlayer.src = '/proxy?url=' + encodeURIComponent(url);
+    videoPlayer.src = `/proxy?url=${encodeURIComponent(modifiedUrl)}`;
     videoPlayer.play();
   }
 }
+
 
 
 
